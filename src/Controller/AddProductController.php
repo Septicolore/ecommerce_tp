@@ -12,10 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AddProductController extends AbstractController
 {
-    /**
-     * @Route("/add/product", name="add_product")
-     */
-    public function index(): Response
+
+    /*public function index(): Response
     {
         //on creer le formulaire a partir de addproductformtype
         $form = $this->createForm(AddProductFormType::class);
@@ -24,18 +22,21 @@ class AddProductController extends AbstractController
             //permet d'afficher le formulaire
             'AddProductFormType' =>$form->createView(),
         ]);
-    }
+    }*/
 
+    /**
+     * @Route("/add/product", name="add_product")
+     */
     public function create(Request $request): Response
     {
         // On crée un objet qui est une instance de notre entité
 
-        $product = new Product();
+        $Product = new Product();
 
         //On crée le formulaire a partir de AddProductFormType (dans le dossier form)
         //symfony rempli l'objet $OneProduct avec les données du formulaire
         // grâce à la request
-        $form = $this->createForm(AddProductFormType::class, $product);
+        $form = $this->createForm(AddProductFormType::class, $Product);
 
         //Permet de lié le formulaire à la requete (pour récuperer le $_POST)
         $form->handleRequest($request);
@@ -46,17 +47,18 @@ class AddProductController extends AbstractController
             //dump($form->getData()); //Permet de faire un dump
             // et vérifie si le formulaire a bien transmis ce que l'on veut
             //$Product est la meme chose que getData car on l'a rajouter dans le createform
-            dump($product);
+            dump($Product);
 
             //upload image
             /** @var UploadedFile $image */
             $image = $form->get('img')->getData();
+            dump($image);
             if ($image) {
                 $filename = uniqid() . '.' . $image->guessExtension();
-                $image->move($this->getParameter('upload_directory'));
-                $product->setImg($filename);
+                $image->move($this->getParameter('upload_directory'),$filename);
+                $Product->setImg($filename);
             }else {
-                $product->setImg('default.jpg');
+                $Product->setImg('default.jpg');
             }
 
 
@@ -66,7 +68,7 @@ class AddProductController extends AbstractController
             //On récupere le service doctrine qui permet de gérer la base de données
             $entityManager = $this->getDoctrine()->getManager();
             //On doit mettre l'objet en attente
-            $entityManager->persist($product);
+            $entityManager->persist($Product);
             //On exécute la requete
             $entityManager->flush();
 

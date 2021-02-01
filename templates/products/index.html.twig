@@ -67,10 +67,11 @@
                 <div class="card bg-light mb-3">
                     <div class="card-header bg-success text-white text-uppercase">Dernier produit</div>
                     <div class="card-body">
-                        <img class="img-fluid" src="https://dummyimage.com/600x400/55595c/fff" />
-                        <h5 class="card-title mt-3">Produit</h5>
+                       <img class="img-fluid" src="{{ asset('img/uploads/' ~ LastProduct.img) }}" />
+                        <h5 class="card-title mt-3">{{ LastProduct.name }}</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        <p class="bloc_left_price">99.00 &euro;</p>
+                        <p class="bloc_left_price">{{ LastProduct.price }}</p>
+
                     </div>
                 </div>
             </div>
@@ -79,7 +80,7 @@
                     {% for product in pagination %}
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="card">
-                            <img class="card-img-top" src="{{ asset('img/' ~ product.img) }}" alt="Card image cap">
+                            <img class="card-img-top" src="{{ asset('img/uploads/' ~ product.img) }}" alt="Card image cap">
                             <div class="card-body">
                                 <h4 class="card-title">
                                     <a href="{{ path('product', {slug: product.slug, id: product.id}) }}"

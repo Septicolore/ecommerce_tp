@@ -19,6 +19,21 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    public function FindLastId()
+    {
+        return $this->createQueryBuilder('o')
+
+            ->orderBy('o.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
+
+
+
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */

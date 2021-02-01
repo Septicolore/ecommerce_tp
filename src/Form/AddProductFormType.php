@@ -19,10 +19,10 @@ class AddProductFormType extends AbstractType
             ->add('price')
             ->add('createdate')
             ->add('img', FileType::class, [
-                //'mapped' =>false,
+                'mapped' =>false,
             ])
             ->add('favori')
-            ->add('slugproduct')
+            ->add('slug')
             ->add('color')
             ->add('promotion', ChoiceType::class,  [
                 'choices' => [

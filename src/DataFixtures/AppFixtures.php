@@ -24,11 +24,11 @@ $faker = Factory::create("fr_FR");
 for($i = 0; $i <20; $i++){
     $product = new Product();
     $product->setImg($faker->randomElement([
-        'souris1.jpg',
-        'souris2.jpg',
-        'souris3.jpg',
-        'souris4.jpg',
-        'souris5.jpg',
+        'fixtures/souris1.jpg',
+        'fixtures/souris2.jpg',
+        'fixtures/souris3.jpg',
+        'fixtures/souris4.jpg',
+        'fixtures/souris5.jpg',
     ])
     );
     $product->setName($faker->name);

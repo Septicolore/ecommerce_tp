@@ -31,7 +31,7 @@
                 <div class="card bg-light mb-3">
                     <div class="card-body">
                         <a href="" data-toggle="modal" data-target="#productModal">
-                            <img class="img-fluid" src="{{ asset('img/' ~ product.img) }}" />
+                            <img class="img-fluid" src="{{ asset('img/uploads/' ~ product.img) }}" />
                             <p class="text-center">Zoom</p>
                         </a>
                     </div>
@@ -43,6 +43,7 @@
                 <div class="card bg-light mb-3">
                     <div class="card-body">
                         <p class="price">{{ product.price }} &euro;</p>
+                        <p class="price">{{ product.pcstuff.name }}</p>
                         <p class="price_discounted">149.90 &euro;</p>
                         <form method="get" action="cart.html">
                             <div class="form-group">

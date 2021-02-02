@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Pcstuff;
 use App\Entity\Product;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -37,9 +38,19 @@ $faker = Factory::create("fr_FR");
         $user->setRoles(['ROLE_ADMIN']);
         $manager->persist($user);
 
+        //_______Création des catégories__________________________
+        $stuffs = ['Clavier', 'Souris', 'Casque', 'Tapis de souris'];
+        foreach ($stuffs as $key => $stuff){
+            $pcstuff = new Pcstuff();
+            $pcstuff->setName($stuff);
+            $this->addReference('stuff-'.$key, $pcstuff);
+            $manager->persist($pcstuff);
+        }
+
 
 for($i = 0; $i <20; $i++){
     $product = new Product();
+    $pcstuff = $this->getReference('stuff-'.rand(0,count($stuffs)-1));
     $product->setImg($faker->randomElement([
         'fixtures/souris1.jpg',
         'fixtures/souris2.jpg',
@@ -54,6 +65,7 @@ for($i = 0; $i <20; $i++){
     $product->setCreatedate(new \DateTime());
     $product->setPrice($faker->numberBetween(99, 4000));
     $product->setFavori($faker->boolean());
+    $product->setPcstuff($pcstuff);
     $color = $faker->randomElement(['rouge', 'bleu', 'blanc','noir','vert']);
     $product->setColor($color);
 

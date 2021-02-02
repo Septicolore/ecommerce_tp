@@ -62,6 +62,12 @@ class Product
      */
     private $promotion;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Pcstuff::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Pcstuff;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -151,6 +157,18 @@ class Product
         return $this;
     }
 
+    public function getSlugproduct(): ?string
+    {
+        return $this->slugproduct;
+    }
+
+    public function setSlugproduct(string $slugproduct): self
+    {
+        $this->slugproduct = $slugproduct;
+
+        return $this;
+    }
+
     public function getColor(): ?string
     {
         return $this->color;
@@ -171,6 +189,18 @@ class Product
     public function setPromotion(?float $promotion): self
     {
         $this->promotion = $promotion;
+
+        return $this;
+    }
+
+    public function getPcstuff(): ?Pcstuff
+    {
+        return $this->Pcstuff;
+    }
+
+    public function setPcstuff(?Pcstuff $Pcstuff): self
+    {
+        $this->Pcstuff = $Pcstuff;
 
         return $this;
     }

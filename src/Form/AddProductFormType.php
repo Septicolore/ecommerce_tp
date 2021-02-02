@@ -23,6 +23,9 @@ class AddProductFormType extends AbstractType
             ])
             ->add('favori')
             ->add('slug')
+            ->add('Pcstuff', null, [
+                'choice_label' => 'name'
+    ])
             ->add('color')
             ->add('promotion', ChoiceType::class,  [
                 'choices' => [
